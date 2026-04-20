@@ -80,7 +80,7 @@ Thumbs.db
 # Environment / secrets
 .env
 .env.*
-appsettings.json
+appsettings.Local.json
 appsettings.*.local.json
 secrets.json
 body.json

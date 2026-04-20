@@ -51,9 +51,14 @@ class Program
 
     static AppConfig LoadConfig()
     {
+        const string ConfigFileName = "appsettings.Local.json";
+
+        if (!File.Exists(ConfigFileName))
+            throw new Exception($"配置文件 {ConfigFileName} 不存在, 请确保与程序exe同目录下有该文件。如果没有, 可按README.md中的示例创建一个。");
+
         IConfigurationRoot configuration = new ConfigurationBuilder()
             .SetBasePath(AppContext.BaseDirectory)
-            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            .AddJsonFile(ConfigFileName, optional: false, reloadOnChange: true)
             .Build();
 
         AppConfig config = new AppConfig();
@@ -91,7 +96,7 @@ class Program
             if (!File.Exists(BodyPath))
             {
                 await WriteResponseAsync(context, 404, "Body file not found");
-                Console.WriteLine($"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] 文件未找到: {BodyPath}");
+                Console.WriteLine($"配置文件 {BodyPath} 不存在, 将无法使用Http Post发送推送通知。可按README.md中的示例创建该配置。");
                 return;
             }
 

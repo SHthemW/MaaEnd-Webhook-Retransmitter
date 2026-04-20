@@ -86,6 +86,7 @@ class Program
             Console.WriteLine($"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] 收到 GET: {path} 来自 {remote}");
 
             const string BodyPath = "body.json";
+            const string BodyRuntimePlaceholder = "RUNTIME_MSG";
 
             if (!File.Exists(BodyPath))
             {
@@ -95,6 +96,17 @@ class Program
             }
 
             string body = await File.ReadAllTextAsync(BodyPath, Encoding.UTF8);
+
+            if (body.Contains(BodyRuntimePlaceholder))
+            {
+                string queryMessage = context.Request.QueryString["msg"] ?? "No query message";
+
+                string runtimeMessage = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss}\n\n{queryMessage}";
+
+                body = body.Replace(BodyRuntimePlaceholder, runtimeMessage);
+
+                Console.WriteLine($"已替换 RUNTIME_MSG -> {runtimeMessage}");
+            }
 
             using var content = new StringContent(body, Encoding.UTF8, config.ContentType);
 

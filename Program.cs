@@ -18,6 +18,10 @@ class Program
 {
     private static readonly HttpClient httpClient = new HttpClient();
 
+    static readonly string ConfigFilePath = Path.Combine(AppContext.BaseDirectory, "appsettings.Local.json");
+    static readonly string BodyPath = Path.Combine(AppContext.BaseDirectory, "body.json");
+    const string BodyRuntimePlaceholder = "RUNTIME_MSG";
+
     static async Task Main(string[] args)
     {
         AppConfig config = LoadConfig();
@@ -51,14 +55,12 @@ class Program
 
     static AppConfig LoadConfig()
     {
-        const string ConfigFileName = "appsettings.Local.json";
-
-        if (!File.Exists(ConfigFileName))
-            throw new Exception($"配置文件 {ConfigFileName} 不存在, 请确保与程序exe同目录下有该文件。如果没有, 可按README.md中的示例创建一个。");
+        if (!File.Exists(ConfigFilePath))
+            throw new Exception($"配置文件 {ConfigFilePath} 不存在, 请确保与程序exe同目录下有该文件。如果没有, 可按README.md中的示例创建一个。");
 
         IConfigurationRoot configuration = new ConfigurationBuilder()
             .SetBasePath(AppContext.BaseDirectory)
-            .AddJsonFile(ConfigFileName, optional: false, reloadOnChange: true)
+            .AddJsonFile(ConfigFilePath, optional: false, reloadOnChange: true)
             .Build();
 
         AppConfig config = new AppConfig();
@@ -89,9 +91,6 @@ class Program
             }
 
             Console.WriteLine($"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] 收到 GET: {path} 来自 {remote}");
-
-            const string BodyPath = "body.json";
-            const string BodyRuntimePlaceholder = "RUNTIME_MSG";
 
             if (!File.Exists(BodyPath))
             {

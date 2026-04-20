@@ -1,5 +1,5 @@
 # MaaEnd-Webhook-Retransmitter
-MaaEnd的Webhook任务默认使用HTTP GET实现, 无法适配大多数推送平台, 很多情况下并不能有效的推送消息.
+MaaEnd的Webhook任务默认使用HTTP GET实现, 但大多数平台的Webhook依赖HTTP POST来接受数据, 因此多数情况下它不能有效的进行消息推送.
 
 使用本程序, 通过本地服务转发MaaEnd的Webhook操作为HTTP POST, 通过自定义body实现多平台消息通知.
 

@@ -3,7 +3,10 @@ MaaEnd的Webhook任务默认使用HTTP GET实现, 但大多数平台的Webhook�
 
 使用本程序, 通过本地服务转发MaaEnd的Webhook操作为HTTP POST, 通过自定义body实现多平台消息通知.
 
-<img src="res/example_end.png" style="zoom: 50%;" /> <img src="res/example.jpg" style="zoom: 19.8%;" />
+<p style="display: flex; justify-content: center; align-items: center; gap: 24px;">
+  <img src="res/example_end.png" alt="example_end" width="40%" />
+  <img src="res/example.jpg" alt="example" width="18%" />
+</p>
 
 ## 使用方法
 1. 从Release处下载程序, 无需安装其它环境.

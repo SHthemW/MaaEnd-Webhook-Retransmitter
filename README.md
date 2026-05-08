@@ -3,6 +3,8 @@ MaaEnd的Webhook任务默认使用HTTP GET实现, 但大多数平台的Webhook�
 
 使用本程序, 通过本地服务转发MaaEnd的Webhook操作为HTTP POST, 通过自定义body实现多平台消息通知.
 
+<img src="res/example_end.png" style="zoom: 50%;" /> <img src="res/example.jpg" style="zoom: 19.8%;" />
+
 ## 使用方法
 1. 从Release处下载程序, 无需安装其它环境.
 2. 启动前, 需在程序的exe文件所在目录创建两个配置文件. 直接新建记事本, 编辑内容然后改名即可.
@@ -39,9 +41,17 @@ MaaEnd的Webhook任务默认使用HTTP GET实现, 但大多数平台的Webhook�
 ```
 
 3. 双击exe运行服务.
+
 4. 在MaaEnd主程序里添加webhook操作, 将url设置为配置文件里的`ServerUrl`即可使用消息转发功能.
    - 可以使用HTTP查询参数`?msg=`来传递消息.  如填写`http://localhost:17464/?msg=测试`将会将`body.json`里的`RUNTIME_MSG`替换为`"测试"`进行发送.
+
+   <img src="res/example_end.png" style="zoom: 50%;" />
+
 5. 在多任务之间穿插步骤4, 即可实现手动消息推送功能.
+
+6. 为了方便起见, 可以在MaaEnd的"前置程序"中添加本程序, 这样每次主进程运行的时候都会自动开启推送服务.
+
+   <img src="res/pre.png" style="zoom:50%;" />
 
 <br/>
 <br/>

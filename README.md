@@ -1,4 +1,6 @@
 # MaaEnd-Webhook-Retransmitter
+### 重要提示：介于本程序使用较为麻烦(需要手动填写推送信息)且不能捕获日志内的详细信息, 我重新开发了基于OCR的MaaEnd日志推送器: https://github.com/SHthemW/MaaEnd-OCR-Webhook-Service, 建议使用该版本以获得更好的体验.
+
 MaaEnd的Webhook任务默认使用HTTP GET实现, 但大多数平台的Webhook依赖HTTP POST来接受数据, 因此多数情况下它不能有效的进行消息推送.
 
 使用本程序, 通过本地服务转发MaaEnd的Webhook操作为HTTP POST, 通过自定义body实现多平台消息通知.
